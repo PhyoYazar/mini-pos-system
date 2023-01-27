@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ul,
+     ol {
+      list-style: none;
+    } */
+}
+
+@layer components {
+  .flex-between {
+    @apply flex items-center justify-between;
+  }
+
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+}
+
+@layer utilities {
+  /* .test {
+        padding: 5px 10px;
+      } */
+}
