@@ -8,6 +8,8 @@ const useAxios = <T,>(apiData: ApiControllerI) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
+  console.log(isLoading, error);
+
   useEffect(() => {
     const controller = new AbortController();
 
