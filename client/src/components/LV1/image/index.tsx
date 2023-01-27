@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { EyeOpenIcon, EyeCloseIcon } from './icon';
+import { EyeOpenIcon, EyeCloseIcon, MailIcon, LogoIcon, StarIcon } from './icon';
 
 interface ImageComponentInterface {
   width: number;
@@ -59,6 +59,15 @@ const IconComponent = (props: ImageComponentInterface) => {
 
     case 'closeEye':
       return <EyeCloseIcon {...props} />;
+
+    case 'mail':
+      return <MailIcon {...props} />;
+
+    case 'logo':
+      return <LogoIcon {...props} />;
+
+    case 'star':
+      return <StarIcon {...props} />;
 
     default:
       return null;

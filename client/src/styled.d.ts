@@ -5,7 +5,8 @@ declare module 'styled-components' {
     colors: {
       // themecolor: string;
 
-      // primary: string;
+      primary: string;
+      'primary-light': string;
       // secondary: string;
 
       neutral900: string;
@@ -14,6 +15,7 @@ declare module 'styled-components' {
       neutral600: string;
       neutral500: string;
       neutral400: string;
+      neutral350: string;
       neutral300: string;
       neutral200: string;
       neutral100: string;

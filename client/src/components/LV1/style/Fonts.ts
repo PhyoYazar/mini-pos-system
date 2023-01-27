@@ -3,6 +3,7 @@ export const fontSize = {
   xbg: 46,
   bg: 38,
   xxl: 31.25,
+  bxl: 30,
   xl: 26,
   xlg: 22,
   lg: 20,

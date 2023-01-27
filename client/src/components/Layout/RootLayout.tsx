@@ -9,6 +9,8 @@ const RootLayout = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
 
+  console.log(getToken());
+
   useEffect(() => {
     if (isAuthenticated) {
       if (pathname.includes('login')) {

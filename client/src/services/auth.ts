@@ -2,19 +2,19 @@ import CryptoJS from 'crypto-js';
 import Cookies from 'js-cookie';
 import type { APILoginDataInterface } from '../lib/interface/auth';
 
-export const setToken = ({ j_token }: { j_token: string }): void => {
-  const copherAccessToken = CryptoJS.AES.encrypt(JSON.stringify(j_token), 'j_token');
+export const setToken = ({ jwt_token }: { jwt_token: string }): void => {
+  const copherAccessToken = CryptoJS.AES.encrypt(JSON.stringify(jwt_token), 'jwt_token');
   //   const rememberMe = getRememberMe();
-  Cookies.set('j_token', copherAccessToken.toString(), {
+  Cookies.set('jwt_token', copherAccessToken.toString(), {
     // expires: rememberMe ? 30 : 1,
     expires: 1,
   });
 };
 
 export const getToken = (): string | null => {
-  const sessi = Cookies.get('j_token');
+  const sessi = Cookies.get('jwt_token');
   if (!sessi) return null;
-  const bytes = CryptoJS.AES.decrypt(sessi, 'j_token');
+  const bytes = CryptoJS.AES.decrypt(sessi, 'jwt_token');
   try {
     const decryptedData = JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
     return decryptedData;
@@ -46,10 +46,9 @@ export const getUserInfo = (): APILoginDataInterface | null => {
   }
 };
 
-
 export const logout = () => {
   Cookies.remove('user_info');
-  Cookies.remove('j_token');
+  Cookies.remove('jwt_token');
   localStorage.removeItem('user_info');
-  localStorage.removeItem('j_token');
+  localStorage.removeItem('jwt_token');
 };
