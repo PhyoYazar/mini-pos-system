@@ -1,1 +1,14 @@
-export const iconsName = ['search', 'start', 'logo', 'mail', 'openEye', 'closeEye'];
+export const iconsName = [
+  'minus',
+  'plus',
+  'close',
+  'buy',
+  'cart',
+  'card',
+  'search',
+  'start',
+  'logo',
+  'mail',
+  'openEye',
+  'closeEye',
+];
