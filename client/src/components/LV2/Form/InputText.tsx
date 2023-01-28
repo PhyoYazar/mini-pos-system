@@ -4,7 +4,7 @@ import {
   Controller,
   FieldPath,
   FieldValues,
-  FieldError,
+  // FieldError,
   //   UseControllerProps,
 } from 'react-hook-form';
 
@@ -46,6 +46,7 @@ const InputText = <T extends FieldValues>(props: Props<T>) => {
                 placeholder={props.placeholder}
                 disabled={props.disabled}
               />
+
               {props.password && (
                 <EyeIconStyled onClick={props.onClick}>
                   <Image
@@ -86,17 +87,17 @@ const ErrorTextStyled = styled(Text)`
 `;
 
 const LabelStyled = styled.label`
-  font-size: ${({ theme }) => theme.fontSize.md}px;
-  font-weight: ${({ theme }) => theme.fontWeight.lg};
-  color: ${({ theme }) => theme.colors.neutral600};
+  font-size: ${({ theme }) => theme.fontSize.sm}px;
+  font-weight: ${({ theme }) => theme.fontWeight.semilg};
+  color: ${({ theme }) => theme.colors.neutral700};
 `;
 
 const InputStyled = styled.input`
   width: 300px;
-  padding: 5px 10px;
+  padding: 6px 10px;
   font-size: ${({ theme }) => theme.fontSize.md}px;
 
-  border: 3px solid ${({ theme }) => theme.colors.neutral400};
+  border: 1.5px solid ${({ theme }) => theme.colors.neutral300};
   border-radius: 8px;
   color: ${({ theme }) => theme.colors.neutral600};
 
@@ -105,6 +106,6 @@ const InputStyled = styled.input`
   &:active,
   &:focus {
     outline: none;
-    border: 3px solid ${({ theme }) => theme.colors.neutral500};
+    border: 1.5px solid ${({ theme }) => theme.colors.primaryLight};
   }
 `;

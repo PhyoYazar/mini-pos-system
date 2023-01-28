@@ -40,8 +40,8 @@ const ButtonStyled = styled.button<ButtonInterface>`
       width: 100%;
     `}
   padding: 6px 20px;
-  border-radius: 30px;
-  font-weight: ${({ theme }) => theme.fontWeight.semilg};
+  border-radius: 6px;
+  font-weight: ${({ theme }) => theme.fontWeight.md};
 
   font-size: ${({ theme, textsize }) => (textsize ? textsize : theme.fontSize.sm)}px;
 

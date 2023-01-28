@@ -59,14 +59,16 @@ const Login = () => {
       </div>
 
       <div className='flex-center'>
-        <div>
-          <Title size='xl' weight='semilg' as='h1' mb='5'>
-            Login
-          </Title>
-          <Text color={theme.colors.neutral500}>Welcome back! Please enter your details.</Text>
-        </div>
+        <div className='flex flex-col space-y-5'>
+          <div>
+            <Title size='xl' weight='semilg' as='h1' mb='5' color={theme.colors.neutral800}>
+              Login
+            </Title>
+            <Text color={theme.colors.neutral500}>Welcome back! Please enter your details.</Text>
+          </div>
 
-        <LoginForm />
+          <LoginForm />
+        </div>
       </div>
     </section>
   );
