@@ -88,6 +88,28 @@ export const MailIcon = (props: PropsInterface) => {
   );
 };
 
+export const SearchIcon = (props: PropsInterface) => {
+  return (
+    <IconWrap {...props}>
+      <svg
+        width='21'
+        height='20'
+        viewBox='0 0 21 20'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <path
+          d='M19.8713 19L15.5213 14.65M17.8713 9C17.8713 13.4183 14.2896 17 9.87134 17C5.45306 17 1.87134 13.4183 1.87134 9C1.87134 4.58172 5.45306 1 9.87134 1C14.2896 1 17.8713 4.58172 17.8713 9Z'
+          stroke='#FCFCFD'
+          strokeWidth='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+        />
+      </svg>
+    </IconWrap>
+  );
+};
+
 export const StarIcon = (props: PropsInterface) => {
   return (
     <IconWrap {...props}>

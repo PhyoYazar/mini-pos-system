@@ -2,14 +2,12 @@ import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { getToken } from '../../services/auth';
 
-const isAuthenticated = getToken();
-// const isAuthenticated = false;
+// const isAuthenticated = getToken();
+const isAuthenticated = true;
 
 const RootLayout = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-
-  console.log(getToken());
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -21,10 +19,9 @@ const RootLayout = () => {
     }
   }, [isAuthenticated]);
 
-  //   if (!isPending) return <Outlet />;
-  if (true) return <Outlet />;
+  if (false) return <div> Loading... </div>;
 
-  return <div> Loading... </div>;
+  return <Outlet />;
 };
 
 export default RootLayout;

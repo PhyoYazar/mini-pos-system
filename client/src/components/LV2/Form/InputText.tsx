@@ -9,6 +9,7 @@ import {
 } from 'react-hook-form';
 
 import { Image, Text } from '../../LV1';
+import { InputStyled } from './InputStyled';
 
 interface Props<T extends FieldValues> {
   // errors: FieldError | undefined;
@@ -39,7 +40,8 @@ const InputText = <T extends FieldValues>(props: Props<T>) => {
         render={({ field }) => (
           <>
             <div className='relative'>
-              <InputStyled
+              <Input
+                as='input'
                 {...field}
                 type={props.type ? props.type : 'text'}
                 id={props.name}
@@ -92,20 +94,9 @@ const LabelStyled = styled.label`
   color: ${({ theme }) => theme.colors.neutral700};
 `;
 
-const InputStyled = styled.input`
-  width: 300px;
-  padding: 6px 10px;
-  font-size: ${({ theme }) => theme.fontSize.md}px;
-
-  border: 1.5px solid ${({ theme }) => theme.colors.neutral300};
-  border-radius: 8px;
-  color: ${({ theme }) => theme.colors.neutral600};
-
-  /* transition: all 0.1s; */
-
+const Input = styled(InputStyled)`
   &:active,
   &:focus {
-    outline: none;
     border: 1.5px solid ${({ theme }) => theme.colors.primaryLight};
   }
 `;

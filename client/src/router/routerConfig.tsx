@@ -19,7 +19,6 @@ const routerConfig: RouteObject[] = [
       // PRIVATE ROUTES
       {
         path: '',
-        element: <PrivateLayout />,
         children: privateRoutes,
       },
       {

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MainNavigation from './MainNavigation';
 
 const PrivateLayout = () => {
   return (
     <>
-      <MainNavigation />
+      {/* <MainNavigation /> */}
 
-      <main className='container'>
+      <main className='w-full h-screen container'>
         <Outlet />
       </main>
     </>

@@ -44,7 +44,6 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (data: AuthFormValues) => {
-    // LOGIN
     const res: APILoginResInterface = await apiController({
       endpoint: apiRoutes.login,
       data: { email: data.email, password: data.password },
@@ -65,7 +64,7 @@ const LoginForm = () => {
           name='email'
           errors={errors.email?.message}
           label='Email'
-          placeholder='Enter email'
+          placeholder='Enter your email'
         />
 
         <InputText
