@@ -15,7 +15,6 @@ declare module 'styled-components' {
       neutral600: string;
       neutral500: string;
       neutral400: string;
-      neutral350: string;
       neutral300: string;
       neutral200: string;
       neutral100: string;
