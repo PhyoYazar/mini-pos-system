@@ -23,13 +23,14 @@ const Home = () => {
 
   const theme = useTheme();
 
+  // fetching All Category API
   const { data: category_data } = useAxios<CategoriesResInterface>({
     endpoint: apiRoutes.getAllCategory,
   });
 
+  // fetching All Products API
   useEffect(() => {
     const controller = new AbortController();
-
     const filter: { category?: string } = {};
     if (activeElement) {
       filter.category = activeElement;
@@ -49,6 +50,19 @@ const Home = () => {
 
     return () => controller.abort();
   }, [activeElement]);
+
+  // Creating Order API
+  const createOrderHandler = async (id: string, product_price: number) => {
+    if (id && product_price) {
+      await apiController({
+        endpoint: apiRoutes.createOrder,
+        data: {
+          product: id,
+          product_price,
+        },
+      });
+    }
+  };
 
   return (
     <div className='w-full h-screen container py-6 space-y-6'>
@@ -80,7 +94,7 @@ const Home = () => {
               <Image iconType='card' width={170} height={170} />
 
               <Title as='h3' weight='md'>
-                {el.title}
+                {el?.title}
               </Title>
 
               <div className='flex items-baseline gap-1'>
@@ -93,23 +107,22 @@ const Home = () => {
                   weight='semilg'
                   color={theme.colors.primaryLight}
                 >
-                  {el.price}
+                  {el?.price}
                 </Text>
               </div>
 
-              <div className=''>
-                <Button
-                  type='submit'
-                  textcolor={theme.colors.white}
-                  bordercolor={theme.colors.primaryLight}
-                  bgcolor={theme.colors.primaryLight}
-                  bghovercolor={theme.colors.primary}
-                  borderhovercolor={theme.colors.primary}
-                  fullWidth
-                >
-                  Add to Cart
-                </Button>
-              </div>
+              <Button
+                onClick={() => createOrderHandler(el?._id, el?.price)}
+                type='submit'
+                textcolor={theme.colors.white}
+                bordercolor={theme.colors.primaryLight}
+                bgcolor={theme.colors.primaryLight}
+                bghovercolor={theme.colors.primary}
+                borderhovercolor={theme.colors.primary}
+                fullWidth
+              >
+                Add to Cart
+              </Button>
             </Card>
           ))}
         </section>

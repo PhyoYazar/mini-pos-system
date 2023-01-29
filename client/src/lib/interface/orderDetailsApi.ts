@@ -7,11 +7,16 @@ export interface OrderInterface {
   };
   product_price: number;
   total_products: number;
+  total_price: number;
   bought: boolean;
   createdAt: string;
   updatedAt: string;
-  total_price: number;
   id: string;
+}
+
+export interface OrderUpdatedResInterface {
+  status: string;
+  data: OrderInterface[];
 }
 
 export interface OrderDetailResInterface {
@@ -22,4 +27,10 @@ export interface OrderDetailResInterface {
     tax: number;
     total: number;
   };
+}
+
+export interface PayNowResInterface {
+  status: string;
+  message: string;
+  data: object[];
 }

@@ -3,9 +3,15 @@ import styled, { useTheme } from 'styled-components';
 
 import { apiController, apiRoutes } from '../../../controllers';
 import useAxios from '../../../hooks/useAxios';
-import { OrderDetailResInterface } from '../../../lib';
 import { Image, Text, Title } from '../../LV1';
 import Button from '../../LV2/Button/Button';
+import {
+  OrderDetailResInterface,
+  OrderUpdatedResInterface,
+  PayNowResInterface,
+} from '../../../lib';
+
+// const refetchOrderDetailsAPI = (): OrderDetailResInterface => {};
 
 const OrderBox = () => {
   const [ordersData, setOrdersData] = useState<OrderDetailResInterface>();
@@ -30,7 +36,7 @@ const OrderBox = () => {
         endpoint: `${apiRoutes.deleteOrderById}/${id}`,
       });
 
-      const res = await apiController({
+      const res: OrderDetailResInterface = await apiController({
         endpoint: apiRoutes.getAllOrdersDetailsByUser,
       });
 
@@ -42,10 +48,12 @@ const OrderBox = () => {
 
   // Pay Now
   const payNowHandler = async () => {
-    const res = await apiController({ endpoint: apiRoutes.payNow });
+    const res: PayNowResInterface = await apiController({
+      endpoint: apiRoutes.payNow,
+    });
 
     if (res?.status === 'success') {
-      const orderDetailRes = await apiController({
+      const orderDetailRes: OrderDetailResInterface = await apiController({
         endpoint: apiRoutes.getAllOrdersDetailsByUser,
       });
 
@@ -56,13 +64,13 @@ const OrderBox = () => {
   };
 
   const increaseProductHandler = async (id: string, total_product: number) => {
-    const res = await apiController({
+    const res: OrderUpdatedResInterface = await apiController({
       endpoint: `${apiRoutes.updateOrderById}/${id}`,
       data: { total_products: total_product + 1 },
     });
 
     if (res?.status === 'success') {
-      const orderDetailRes = await apiController({
+      const orderDetailRes: OrderDetailResInterface = await apiController({
         endpoint: apiRoutes.getAllOrdersDetailsByUser,
       });
 
@@ -71,8 +79,9 @@ const OrderBox = () => {
       }
     }
   };
+
   const decreaseProductHandler = async (id: string, total_product: number) => {
-    const res = await apiController({
+    const res: OrderUpdatedResInterface = await apiController({
       endpoint: `${apiRoutes.updateOrderById}/${id}`,
       data: { total_products: total_product - 1 },
     });
@@ -93,7 +102,7 @@ const OrderBox = () => {
       <div className='px-5 py-2 overflow-auto '>
         <Title size='xlg'>Order details</Title>
 
-        <div className='space-y-5'>
+        <div className='space-y-8'>
           {ordersData?.data?.data.map((el, index) => (
             <div key={index} className='flex items-start justify-between gap-3'>
               <div className=''>
