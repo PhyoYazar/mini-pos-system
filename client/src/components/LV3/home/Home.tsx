@@ -88,6 +88,7 @@ const Home = () => {
     await apiController({
       endpoint: apiRoutes.createOrder,
       data: {
+        user: getUserInfo()?._id,
         product: id,
         product_price,
       },
