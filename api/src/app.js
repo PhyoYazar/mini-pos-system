@@ -37,7 +37,8 @@ app.use(
     origin: [
       'http://localhost:5173',
       'http://localhost:5174',
-      'https://pos-ttlf.onrender.com',
+      'https://pos-phyo-yarzar.vercel.app',
+      'https://pos-nu.vercel.app/',
     ],
   }),
 );
