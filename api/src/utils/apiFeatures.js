@@ -18,6 +18,21 @@ class APIFeatures {
     return this;
   }
 
+  search(...searchedFields) {
+    if (this.queryString.search) {
+      const searchKeyword = this.queryString.search;
+
+      const queryArr = searchedFields.map((field) => ({
+        [field]: { $regex: searchKeyword, $options: 'i' },
+      }));
+
+      this.query = this.query.find({
+        $or: queryArr,
+      });
+    }
+    return this;
+  }
+
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(',').join(' ');
