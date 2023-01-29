@@ -11,7 +11,11 @@ router.get('/details', orderController.getAllOrderDetailsByUser);
 router
   .route('/')
   .get(orderController.getAllOrder)
-  .post(orderController.createOrder);
+  .post(
+    orderController.setUserIds,
+    orderController.checkOrderIsExist,
+    orderController.createOrder,
+  );
 
 router
   .route('/:id')
