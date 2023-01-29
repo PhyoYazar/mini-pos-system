@@ -34,7 +34,12 @@ const app = express();
 app.use(
   cors({
     // origin: 'https://www.natours.com',
-    origin: ['http://localhost:5173', 'http://localhost:5174'],
+    origin: [
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'https://pos-phyo-yarzar.vercel.app',
+      'https://pos-nu.vercel.app/',
+    ],
   }),
 );
 
