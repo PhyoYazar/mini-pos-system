@@ -8,7 +8,7 @@ import { InputStyled } from '../../LV2/Form/InputStyled';
 import OrderBox from './OrderBox';
 
 const Header = () => {
-  const [showOrderBox, setShowOrderBox] = useState<boolean>(false);
+  const [showOrderBox, setShowOrderBox] = useState<boolean>(true);
 
   const theme = useTheme();
   const navigate = useNavigate();
