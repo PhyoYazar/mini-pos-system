@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 
 import { apiController, apiRoutes } from '../../../controllers';
-import useAxios from '../../../hooks/useAxios';
 import { Image, Text, Title } from '../../LV1';
 import Button from '../../LV2/Button/Button';
 import {
@@ -10,12 +9,15 @@ import {
   OrderUpdatedResInterface,
   PayNowResInterface,
 } from '../../../lib';
+import { getUserInfo } from '../../../services/auth';
 
-const refetchOrderDetailsAPI = async (): Promise<
+const fetchOrderDetailsAPI = async (): Promise<
   OrderDetailResInterface | undefined
 > => {
   const res: OrderDetailResInterface = await apiController({
-    endpoint: apiRoutes.getAllOrdersDetailsByUser,
+    endpoint: `${apiRoutes.getAllOrdersDetailsByUser}/${
+      getUserInfo()?._id
+    }/orders/details`,
   });
 
   if (res?.status === 'success') {
@@ -30,16 +32,11 @@ const OrderBox = () => {
 
   const theme = useTheme();
 
-  const { data } = useAxios<OrderDetailResInterface>({
-    endpoint: apiRoutes.getAllOrdersDetailsByUser,
-  });
-
-  // if data exist, store in the state
   useEffect(() => {
-    if (data?.status === 'success') {
-      setOrdersData(data);
-    }
-  }, [data]);
+    fetchOrderDetailsAPI()
+      .then((res) => res && setOrdersData(res))
+      .catch((err) => console.log(err));
+  }, []);
 
   // Delete Order by clicking Close icon
   const deleteOrderHandler = async (id: string) => {
@@ -48,7 +45,7 @@ const OrderBox = () => {
         endpoint: `${apiRoutes.deleteOrderById}/${id}`,
       });
 
-      setOrdersData(await refetchOrderDetailsAPI());
+      setOrdersData(await fetchOrderDetailsAPI());
     }
   };
 
@@ -59,7 +56,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      setOrdersData(await refetchOrderDetailsAPI());
+      setOrdersData(await fetchOrderDetailsAPI());
     }
   };
 
@@ -70,7 +67,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      setOrdersData(await refetchOrderDetailsAPI());
+      setOrdersData(await fetchOrderDetailsAPI());
     }
   };
 
@@ -81,7 +78,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      setOrdersData(await refetchOrderDetailsAPI());
+      setOrdersData(await fetchOrderDetailsAPI());
     }
   };
 

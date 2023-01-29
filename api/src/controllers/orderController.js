@@ -92,18 +92,19 @@ exports.payNow = catchAsync(async (req, res, next) => {
     );
   }
 
-  const updatedOrders = userOrders.map(
-    async (order) =>
-      await Order.findByIdAndUpdate(
-        order._id,
-        { bought: true },
-        { new: true, runValidators: true },
-      ),
-  );
+  // const updatedOrders = userOrders.map(
+  //   async (order) =>
+  //     await Order.findByIdAndUpdate(
+  //       order._id,
+  //       { bought: true },
+  //       { new: true, runValidators: true },
+  //     ),
+  // );
+  userOrders.forEach(async (order) => await Order.findByIdAndDelete(order._id));
 
   res.status(201).json({
     status: 'success',
     message: 'You bought all products of your order lists.',
-    data: updatedOrders,
+    // data: updatedOrders,
   });
 });

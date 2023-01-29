@@ -11,7 +11,8 @@ export const apiRoutes = {
   // orders
   createOrder: 'post:orders',
 
-  getAllOrdersDetailsByUser: 'get:orders/details',
+  // getAllOrdersDetailsByUser: 'get:orders/details',
+  getAllOrdersDetailsByUser: 'get:users',
   deleteOrderById: 'delete:orders',
   updateOrderById: 'patch:orders',
 

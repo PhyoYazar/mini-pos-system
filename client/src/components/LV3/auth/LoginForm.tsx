@@ -9,7 +9,7 @@ import Button from '../../LV2/Button/Button';
 import { useTheme } from 'styled-components';
 import { APILoginResInterface } from '../../../lib';
 import { apiController, apiRoutes } from '../../../controllers';
-import { setToken } from '../../../services/auth';
+import { setToken, setUserInfo } from '../../../services/auth';
 
 const validation = yup
   .object()
@@ -51,6 +51,7 @@ const LoginForm = () => {
 
     if (res?.status === 'success') {
       setToken({ jwt_token: res.token });
+      setUserInfo({ user_data: res.data });
       navigate('/', { replace: true });
     }
   };
