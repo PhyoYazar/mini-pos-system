@@ -28,7 +28,15 @@ const getButton = (props: ButtonInterface) => {
 };
 
 const Button = (props: ButtonInterface) => {
-  return <>{props.href ? <Link to={props.href}>{getButton(props)}</Link> : getButton(props)}</>;
+  return (
+    <>
+      {props.href ? (
+        <Link to={props.href}>{getButton(props)}</Link>
+      ) : (
+        getButton(props)
+      )}
+    </>
+  );
 };
 
 export default Button;
@@ -43,19 +51,23 @@ const ButtonStyled = styled.button<ButtonInterface>`
   border-radius: 6px;
   font-weight: ${({ theme }) => theme.fontWeight.md};
 
-  font-size: ${({ theme, textsize }) => (textsize ? textsize : theme.fontSize.sm)}px;
+  font-size: ${({ theme, textsize }) =>
+    textsize ? textsize : theme.fontSize.sm}px;
 
   border: 1.5px solid
-    ${({ theme, bordercolor }) => (bordercolor ? bordercolor : theme.colors.neutral500)};
+    ${({ theme, bordercolor }) =>
+      bordercolor ? bordercolor : theme.colors.neutral500};
 
-  color: ${({ theme, textcolor }) => (textcolor ? textcolor : theme.colors.neutral600)};
+  color: ${({ theme, textcolor }) =>
+    textcolor ? textcolor : theme.colors.neutral600};
 
   background-color: ${({ bgcolor }) => bgcolor && bgcolor};
 
   &:hover {
     /* transform: translateY(-0.3px); */
 
-    border: 1.5px solid ${({ borderhovercolor }) => borderhovercolor && borderhovercolor};
+    border: 1.5px solid
+      ${({ borderhovercolor }) => borderhovercolor && borderhovercolor};
     color: ${({ texthovercolor }) => texthovercolor && texthovercolor};
     background-color: ${({ bghovercolor }) => bghovercolor && bghovercolor};
   }

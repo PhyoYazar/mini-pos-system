@@ -23,7 +23,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off",
     // "camelcase": "error",
-    "spaced-comment": "error",
+    "spaced-comment": "warn",
     "no-console": "warn",
     "quotes": ["error", "single"],
     "no-duplicate-imports": "error"

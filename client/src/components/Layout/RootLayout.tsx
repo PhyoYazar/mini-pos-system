@@ -18,7 +18,7 @@ const RootLayout = () => {
     }
   }, [isAuthenticated]);
 
-  if (false) return <div> Loading... </div>;
+  // if (loading) return <div> Loading... </div>;
 
   return <Outlet />;
 };

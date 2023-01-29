@@ -4,6 +4,8 @@ import {
   Controller,
   FieldPath,
   FieldValues,
+  Path,
+  PathValue,
   // FieldError,
   //   UseControllerProps,
 } from 'react-hook-form';
@@ -15,7 +17,7 @@ interface Props<T extends FieldValues> {
   // errors: FieldError | undefined;
   name: FieldPath<T>;
   control: Control<T>;
-  defaultValue?: any;
+  defaultValue?: PathValue<T, Path<T>> | undefined;
 
   errors: string | undefined;
   label: string;

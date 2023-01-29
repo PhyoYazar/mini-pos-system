@@ -1,9 +1,7 @@
 import type { RouteObject } from 'react-router-dom';
 
-import PrivateLayout from '../components/Layout/PrivateLayout';
 import RootLayout from '../components/Layout/RootLayout';
 import ErrorPage from '../pages/error';
-import Example from '../pages/examples';
 import privateRoutes from './privateRoutes';
 import publicRoutes from './publicRoutes';
 
@@ -20,10 +18,6 @@ const routerConfig: RouteObject[] = [
       {
         path: '',
         children: privateRoutes,
-      },
-      {
-        path: 'exp',
-        element: <Example />,
       },
     ],
   },

@@ -1,3 +1,5 @@
+import { GenericAbortSignal } from 'axios';
+
 export interface ApiControllerI {
   endpoint: string;
   params?: any;
@@ -6,5 +8,5 @@ export interface ApiControllerI {
 }
 
 export interface SignalApiControllerI extends ApiControllerI {
-  signal?: any;
+  signal?: GenericAbortSignal | undefined;
 }
