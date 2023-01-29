@@ -24,8 +24,8 @@ router.patch('/updateMe', userController.updateMe);
 // DELETE USER (as login user)
 router.delete('/deleteMe', userController.deleteMe);
 
-// ADMIN PERMISSION
-//TODO router.use(authController.restrictTo('admin'));
+//TODO ADMIN PERMISSION
+router.use(authController.restrictTo('admin'));
 
 router.route('/').get(userController.getUsers).post(userController.createUser);
 
