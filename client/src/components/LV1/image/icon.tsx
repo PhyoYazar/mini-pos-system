@@ -39,7 +39,11 @@ export const EyeOpenIcon = (props: PropsInterface) => {
           strokeLinejoin='round'
           d='M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z'
         />
-        <path strokeLinecap='round' strokeLinejoin='round' d='M15 12a3 3 0 11-6 0 3 3 0 016 0z' />
+        <path
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          d='M15 12a3 3 0 11-6 0 3 3 0 016 0z'
+        />
       </svg>
     </IconWrap>
   );
@@ -240,7 +244,7 @@ export const PlusIcon = (props: PropsInterface) => {
         viewBox='0 0 14 14'
       >
         <path
-          stroke='#667085'
+          stroke='currentColor'
           strokeLinecap='round'
           strokeLinejoin='round'
           strokeWidth='1.67'
@@ -254,9 +258,15 @@ export const PlusIcon = (props: PropsInterface) => {
 export const MinusIcon = (props: PropsInterface) => {
   return (
     <IconWrap {...props}>
-      <svg xmlns='http://www.w3.org/2000/svg' width='14' height='2' fill='none' viewBox='0 0 14 2'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='14'
+        height='2'
+        fill='none'
+        viewBox='0 0 14 2'
+      >
         <path
-          stroke='#667085'
+          stroke='currentColor'
           strokeLinecap='round'
           strokeLinejoin='round'
           strokeWidth='1.67'
@@ -280,8 +290,16 @@ export const LogoIcon = (props: PropsInterface) => {
       >
         <path fill='url(#pattern0)' d='M0 0H152.833V35H0z'></path>
         <defs>
-          <pattern id='pattern0' width='1' height='1' patternContentUnits='objectBoundingBox'>
-            <use transform='matrix(.001 0 0 .00437 0 -.004)' xlinkHref='#image0_3_30814'></use>
+          <pattern
+            id='pattern0'
+            width='1'
+            height='1'
+            patternContentUnits='objectBoundingBox'
+          >
+            <use
+              transform='matrix(.001 0 0 .00437 0 -.004)'
+              xlinkHref='#image0_3_30814'
+            ></use>
           </pattern>
           <image
             id='image0_3_30814'
@@ -308,8 +326,16 @@ export const LogoWhiteIcon = (props: PropsInterface) => {
       >
         <path fill='url(#pattern0)' d='M0 0.5H151.871V35.5H0z'></path>
         <defs>
-          <pattern id='pattern0' width='1' height='1' patternContentUnits='objectBoundingBox'>
-            <use transform='scale(.00067 .00292)' xlinkHref='#image0_1_4361'></use>
+          <pattern
+            id='pattern0'
+            width='1'
+            height='1'
+            patternContentUnits='objectBoundingBox'
+          >
+            <use
+              transform='scale(.00067 .00292)'
+              xlinkHref='#image0_1_4361'
+            ></use>
           </pattern>
           <image
             id='image0_1_4361'

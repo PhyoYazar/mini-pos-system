@@ -11,7 +11,19 @@ import {
   PayNowResInterface,
 } from '../../../lib';
 
-// const refetchOrderDetailsAPI = (): OrderDetailResInterface => {};
+const refetchOrderDetailsAPI = async (): Promise<
+  OrderDetailResInterface | undefined
+> => {
+  const res: OrderDetailResInterface = await apiController({
+    endpoint: apiRoutes.getAllOrdersDetailsByUser,
+  });
+
+  if (res?.status === 'success') {
+    return res;
+  } else {
+    return undefined;
+  }
+};
 
 const OrderBox = () => {
   const [ordersData, setOrdersData] = useState<OrderDetailResInterface>();
@@ -36,13 +48,7 @@ const OrderBox = () => {
         endpoint: `${apiRoutes.deleteOrderById}/${id}`,
       });
 
-      const res: OrderDetailResInterface = await apiController({
-        endpoint: apiRoutes.getAllOrdersDetailsByUser,
-      });
-
-      if (res?.status === 'success') {
-        setOrdersData(res);
-      }
+      setOrdersData(await refetchOrderDetailsAPI());
     }
   };
 
@@ -53,13 +59,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      const orderDetailRes: OrderDetailResInterface = await apiController({
-        endpoint: apiRoutes.getAllOrdersDetailsByUser,
-      });
-
-      if (orderDetailRes?.status === 'success') {
-        setOrdersData(orderDetailRes);
-      }
+      setOrdersData(await refetchOrderDetailsAPI());
     }
   };
 
@@ -70,13 +70,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      const orderDetailRes: OrderDetailResInterface = await apiController({
-        endpoint: apiRoutes.getAllOrdersDetailsByUser,
-      });
-
-      if (orderDetailRes?.status === 'success') {
-        setOrdersData(orderDetailRes);
-      }
+      setOrdersData(await refetchOrderDetailsAPI());
     }
   };
 
@@ -87,13 +81,7 @@ const OrderBox = () => {
     });
 
     if (res?.status === 'success') {
-      const orderDetailRes = await apiController({
-        endpoint: apiRoutes.getAllOrdersDetailsByUser,
-      });
-
-      if (orderDetailRes?.status === 'success') {
-        setOrdersData(orderDetailRes);
-      }
+      setOrdersData(await refetchOrderDetailsAPI());
     }
   };
 
@@ -121,25 +109,41 @@ const OrderBox = () => {
                 <div className='flex-between'>
                   <div className='flex items-center border border-neutral300 rounded-md shadow-sm'>
                     <Box
-                      className='cursor-pointer'
+                      as='button'
+                      disabled={el?.total_products === 1}
+                      className='cursor-pointer border-r border-neutral300'
                       onClick={() =>
                         decreaseProductHandler(el?._id, el?.total_products)
                       }
                     >
-                      <Image iconType='minus' width={18} height={18} />
+                      <Image
+                        iconType='minus'
+                        width={18}
+                        height={18}
+                        color={
+                          el?.total_products === 1
+                            ? theme.colors.neutral300
+                            : theme.colors.neutral500
+                        }
+                      />
                     </Box>
 
-                    <Box className='border-x border-neutral300'>
+                    <Box className='mx-1'>
                       <Text>{el?.total_products}</Text>
                     </Box>
 
                     <Box
-                      className='cursor-pointer'
+                      className='cursor-pointer border-l border-neutral300'
                       onClick={() =>
                         increaseProductHandler(el?._id, el?.total_products)
                       }
                     >
-                      <Image iconType='plus' width={18} height={18} />
+                      <Image
+                        iconType='plus'
+                        width={18}
+                        height={18}
+                        color={theme.colors.neutral500}
+                      />
                     </Box>
                   </div>
 
@@ -153,7 +157,7 @@ const OrderBox = () => {
               </div>
 
               <div
-                className='w-16 flex justify-end cursor-pointer'
+                className='w-12  flex justify-end cursor-pointer'
                 onClick={() => deleteOrderHandler(el._id)}
               >
                 <Image iconType='close' width={16} height={16} />
