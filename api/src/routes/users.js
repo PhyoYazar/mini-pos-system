@@ -5,7 +5,7 @@ const userController = require('../controllers/userController');
 
 const router = express.Router();
 
-router.use(authController.protect);
+//TODO router.use(authController.protect);
 
 // UPDATE MY PASSWORD (as login user)
 router.patch('/updateMyPassword', authController.updatePassword);
@@ -20,7 +20,7 @@ router.patch('/updateMe', userController.updateMe);
 router.delete('/deleteMe', userController.deleteMe);
 
 // ADMIN PERMISSION
-router.use(authController.restrictTo('admin'));
+//TODO router.use(authController.restrictTo('admin'));
 
 router.route('/').get(userController.getUsers).post(userController.createUser);
 

@@ -17,6 +17,8 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./middlewares/errorMiddleware');
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
+const categoryRoutes = require('./routes/category');
+const productRoutes = require('./routes/product');
 
 dotenv.config();
 
@@ -78,6 +80,8 @@ app.use(express.static(`${__dirname}/public`));
 // ROUTES
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/users', usersRoutes);
+app.use('/api/v1/category', categoryRoutes);
+app.use('/api/v1/product', productRoutes);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
