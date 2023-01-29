@@ -37,7 +37,7 @@ const Header = () => {
         </div>
 
         <div className='w-1/6 flex-between'>
-          <div className='relative'>
+          <div>
             <div
               className='cursor-pointer'
               onClick={() => setShowOrderBox((prev) => !prev)}
@@ -118,7 +118,7 @@ const OrdersBoxStyled = styled.div`
   z-index: 10000;
   overflow: hidden;
 
-  position: absolute;
-  top: 30px;
-  right: -80px;
+  position: fixed;
+  top: 60px;
+  right: 80px;
 `;
