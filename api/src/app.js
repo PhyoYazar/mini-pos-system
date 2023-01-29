@@ -38,7 +38,7 @@ app.use(
       'http://localhost:5173',
       'http://localhost:5174',
       'https://pos-phyo-yarzar.vercel.app',
-      'https://pos-nu.vercel.app/',
+      'https://pos-nu.vercel.app',
     ],
   }),
 );
