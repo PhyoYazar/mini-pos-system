@@ -6,6 +6,8 @@ const router = express.Router({ mergeParams: true });
 
 //TODO router.use(authController.protect);
 
+router.get('/details', orderController.getAllOrderDetailsByUser);
+
 router
   .route('/')
   .get(orderController.getAllOrder)
