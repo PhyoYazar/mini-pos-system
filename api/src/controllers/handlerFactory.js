@@ -6,7 +6,8 @@ exports.getAll = (Model) =>
   catchAsync(async (req, res, next) => {
     // To allow for nested GET 'bookings' on hotel/user (hack)
     let filter = {};
-    if (req.params.userId) filter = { user: req.params.userId };
+    if (req.params.userId)
+      filter = { user: req.params.userId, bought: { $ne: true } };
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()

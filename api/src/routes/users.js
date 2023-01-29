@@ -6,7 +6,8 @@ const orderRouter = require('./orders');
 
 const router = express.Router();
 
-//TODO router.use(authController.protect);
+//TODO
+router.use(authController.protect);
 
 // MERGE WITH ORDER ROUTE
 router.use('/:userId/orders', orderRouter);

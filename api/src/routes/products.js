@@ -1,10 +1,11 @@
 const express = require('express');
 const productController = require('../controllers/productController');
-// const authController = require('../controllers/authController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-//TODO router.use(authController.protect);
+//TODO
+router.use(authController.protect);
 
 router
   .route('/')

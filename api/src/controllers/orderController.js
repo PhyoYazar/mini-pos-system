@@ -16,7 +16,7 @@ exports.checkOrderIsExist = catchAsync(async (req, res, next) => {
     product: req.body.product,
   });
 
-  if (order) {
+  if (order.length > 0) {
     const updatedOrder = await Order.findByIdAndUpdate(
       order[0]._id,
       { total_products: order[0].total_products + 1 },
@@ -35,22 +35,20 @@ exports.checkOrderIsExist = catchAsync(async (req, res, next) => {
   }
 });
 
-//TODO create order must check already exist or not
 exports.createOrder = factory.createOne(Order);
-
 exports.getAllOrder = factory.getAll(Order);
 exports.getOrder = factory.getOne(Order);
 exports.updateOrder = factory.updateOne(Order);
 exports.deleteOrder = factory.deleteOne(Order);
 
 exports.getAllOrderDetailsByUser = catchAsync(async (req, res, next) => {
-  const { userId } = req.params;
+  let user = req.params.userId;
 
-  if (!userId) {
-    return next(new AppError('User Id is invalid.', 400));
+  if (!user) {
+    user = req.user.id;
   }
 
-  const orders = await Order.find({ user: userId, bought: { $ne: true } });
+  const orders = await Order.find({ user, bought: { $ne: true } });
 
   const subTotal = orders.reduce((acc, order) => acc + order.total_price, 0);
   const tax = subTotal * 0.05; // tax is (5%)
@@ -64,5 +62,37 @@ exports.getAllOrderDetailsByUser = catchAsync(async (req, res, next) => {
       tax,
       total,
     },
+  });
+});
+
+exports.payNow = catchAsync(async (req, res, next) => {
+  let user = req.params.userId;
+  if (!user) user = req.user.id;
+
+  const userOrders = await Order.find({
+    user: user,
+    bought: { $ne: true },
+  });
+
+  if (userOrders.length === 0) {
+    return next(
+      new AppError('There is no orders. Please take one order and pay now.'),
+      404,
+    );
+  }
+
+  const updatedOrders = userOrders.map(
+    async (order) =>
+      await Order.findByIdAndUpdate(
+        order._id,
+        { bought: true },
+        { new: true, runValidators: true },
+      ),
+  );
+
+  res.status(201).json({
+    status: 'success',
+    message: 'You bought all products of your order lists.',
+    data: updatedOrders,
   });
 });

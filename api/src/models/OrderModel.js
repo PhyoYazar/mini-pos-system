@@ -41,6 +41,11 @@ orderSchema.virtual('total_price').get(function () {
   return this.product_price * this.total_products;
 });
 
+orderSchema.pre(/^find/, function (next) {
+  this.find({ bought: { $ne: true } });
+  next();
+});
+
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;

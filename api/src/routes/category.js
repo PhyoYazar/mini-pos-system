@@ -1,10 +1,11 @@
 const express = require('express');
 const categoryController = require('../controllers/categoryController');
-// const authController = require('../controllers/authController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-//TODO router.use(authController.protect);
+//TODO
+router.use(authController.protect);
 
 router
   .route('/')
