@@ -17,8 +17,14 @@ interface StyledInterface {
   isActive?: boolean;
 }
 
+interface FilterInterface {
+  category?: string;
+  search?: string;
+}
+
 const Home = () => {
   const [activeElement, setActiveElement] = useState<string>('');
+  const [searchKeywords, setSearchKeywords] = useState<string>('');
   const [productData, setProductData] = useState<ProductInterface[]>([]);
 
   const theme = useTheme();
@@ -30,43 +36,69 @@ const Home = () => {
 
   // fetching All Products API
   useEffect(() => {
+    let time: NodeJS.Timeout;
     const controller = new AbortController();
-    const filter: { category?: string } = {};
-    if (activeElement) {
-      filter.category = activeElement;
-    }
+    const filter: FilterInterface = {};
 
-    (async () => {
+    if (activeElement) filter.category = activeElement;
+
+    // FETCHING PRODUCT API FUNCTION
+    const fetchProducts = async (
+      paramsData: FilterInterface,
+    ): Promise<void> => {
       const res: ProductsResInterface = await apiController({
         endpoint: apiRoutes.getAllProducts,
-        params: filter,
+        params: paramsData,
         signal: controller.signal,
       });
 
       if (res?.status === 'success') {
         setProductData(res.data);
       }
-    })();
+    };
 
-    return () => controller.abort();
-  }, [activeElement]);
+    if (activeElement && !searchKeywords) {
+      fetchProducts(filter);
+      //
+      //
+    } else if (
+      (!activeElement && searchKeywords) ||
+      (activeElement && searchKeywords)
+    ) {
+      filter.search = searchKeywords;
+
+      time = setTimeout(() => {
+        fetchProducts(filter);
+      }, 200);
+      //
+      //
+    } else {
+      fetchProducts(filter);
+    }
+
+    return () => {
+      controller.abort();
+      clearTimeout(time);
+    };
+  }, [activeElement, searchKeywords]);
 
   // Creating Order API
   const createOrderHandler = async (id: string, product_price: number) => {
-    if (id && product_price) {
-      await apiController({
-        endpoint: apiRoutes.createOrder,
-        data: {
-          product: id,
-          product_price,
-        },
-      });
-    }
+    await apiController({
+      endpoint: apiRoutes.createOrder,
+      data: {
+        product: id,
+        product_price,
+      },
+    });
   };
 
   return (
     <div className='w-full h-screen container py-6 space-y-6'>
-      <Header />
+      <Header
+        searchKeywords={searchKeywords}
+        setSearchKeywords={setSearchKeywords}
+      />
 
       <main className='space-y-6'>
         <section className='space-x-2'>

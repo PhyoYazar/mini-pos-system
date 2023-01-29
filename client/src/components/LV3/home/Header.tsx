@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled, { useTheme } from 'styled-components';
 
@@ -7,7 +7,12 @@ import { Image, Text } from '../../LV1';
 import { InputStyled } from '../../LV2/Form/InputStyled';
 import OrderBox from './OrderBox';
 
-const Header = () => {
+type PropsType = {
+  searchKeywords: string;
+  setSearchKeywords: React.Dispatch<React.SetStateAction<string>>;
+};
+
+const Header = (props: PropsType) => {
   const [showOrderBox, setShowOrderBox] = useState<boolean>(true);
 
   const theme = useTheme();
@@ -25,7 +30,12 @@ const Header = () => {
         />
 
         <div className='relative'>
-          <Input type='text' placeholder='Search' />
+          <Input
+            type='text'
+            placeholder='Search'
+            onChange={(e) => props.setSearchKeywords(e.target.value)}
+            value={props.searchKeywords}
+          />
           <SearchButton>
             <Image
               iconType='search'
