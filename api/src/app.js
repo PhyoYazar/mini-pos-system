@@ -34,7 +34,7 @@ const app = express();
 app.use(
   cors({
     // origin: 'https://www.natours.com',
-    origin: 'http://localhost:3400',
+    origin: ['http://localhost:5173', 'http://localhost:5174'],
   }),
 );
 
@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'development') {
 
 // Limit requests from same API
 const limiter = rateLimit({
-  max: 100, // 100 requests
+  max: 500, // 100 requests
   windowMs: 60 * 60 * 1000, // 1hr
   message: 'Too many requests from this IP, please try again in an hour!',
 });

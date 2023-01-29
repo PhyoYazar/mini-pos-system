@@ -8,8 +8,6 @@ const useAxios = <T,>(apiData: ApiControllerI) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  console.log(isLoading, error);
-
   useEffect(() => {
     const controller = new AbortController();
 
@@ -27,12 +25,15 @@ const useAxios = <T,>(apiData: ApiControllerI) => {
         setData(res);
         setError('');
         //
-      } catch (error: any) {
-        if (error.name === 'CanceledError' || error.name === 'AbortError') {
+      } catch (error) {
+        if (
+          (error as Error).name === 'CanceledError' ||
+          (error as Error).name === 'AbortError'
+        ) {
           // canceled API
           //
         } else {
-          setError(error.message);
+          setError((error as Error).message);
         }
         //
       } finally {

@@ -1,4 +1,5 @@
 const Order = require('../models/OrderModel');
+const APIFeatures = require('../utils/apiFeatures');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const factory = require('./handlerFactory');
@@ -48,7 +49,17 @@ exports.getAllOrderDetailsByUser = catchAsync(async (req, res, next) => {
     user = req.user.id;
   }
 
-  const orders = await Order.find({ user, bought: { $ne: true } });
+  const features = new APIFeatures(
+    Order.find({ user, bought: { $ne: true } }),
+    req.query,
+  )
+    .filter()
+    .search()
+    .sort()
+    .limitFields()
+    .paginate();
+
+  const orders = await features.query;
 
   const subTotal = orders.reduce((acc, order) => acc + order.total_price, 0);
   const tax = subTotal * 0.05; // tax is (5%)

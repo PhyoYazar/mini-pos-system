@@ -1,4 +1,9 @@
-import { AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
+import {
+  AxiosError,
+  AxiosInstance,
+  AxiosRequestConfig,
+  AxiosResponse,
+} from 'axios';
 import { getToken } from '../services/auth';
 
 const token = getToken();
@@ -32,7 +37,9 @@ const onResponseError = (error: AxiosError): Promise<AxiosError> => {
   return Promise.reject(error);
 };
 
-export default function setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
+export default function setupInterceptorsTo(
+  axiosInstance: AxiosInstance,
+): AxiosInstance {
   axiosInstance.interceptors.request.use(onRequest, onRequestError);
   axiosInstance.interceptors.response.use(onResponse, onResponseError);
   return axiosInstance;

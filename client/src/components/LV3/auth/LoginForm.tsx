@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import InputText from '../../LV2/Form/InputText';
 import Button from '../../LV2/Button/Button';
 import { useTheme } from 'styled-components';
-import { APILoginResInterface } from '../../../lib/interface/auth';
+import { APILoginResInterface } from '../../../lib';
 import { apiController, apiRoutes } from '../../../controllers';
 import { setToken } from '../../../services/auth';
 

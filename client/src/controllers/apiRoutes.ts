@@ -1,20 +1,23 @@
 export const apiRoutes = {
   // auth
-  login: `post:auth/login`,
+  login: 'post:auth/login',
 
   // products
-  getAllProducts: `get:products`,
+  getAllProducts: 'get:products',
 
   // category
-  getAllCategory: `get:category`,
+  getAllCategory: 'get:category',
 
-  // orders 
-  createOrder: `post:order`,
-  updateOrder: `patch:order`,
+  // orders
+  createOrder: 'post:orders',
 
-  getAllOrdersByUser: `get:`,
+  getAllOrdersDetailsByUser: 'get:orders/details',
+  deleteOrderById: 'delete:orders',
+  updateOrderById: 'patch:orders',
+
+  payNow: 'post:orders/payNow',
 
   // buy
-  createBuyOneProduct: `post:buy`,
-  createBuyAllProductInOrders: `post:`
+  // createBuyOneProduct: 'post:buy',
+  // createBuyAllProductInOrders: 'post:',
 };

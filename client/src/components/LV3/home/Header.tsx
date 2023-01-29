@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled, { useTheme } from 'styled-components';
 
 import { logout } from '../../../services/auth';
@@ -10,6 +11,7 @@ const Header = () => {
   const [showOrderBox, setShowOrderBox] = useState<boolean>(false);
 
   const theme = useTheme();
+  const navigate = useNavigate();
 
   return (
     <header>
@@ -72,7 +74,13 @@ const Header = () => {
             />
           </div>
 
-          <div className='cursor-pointer' onClick={() => logout()}>
+          <div
+            className='cursor-pointer'
+            onClick={() => {
+              logout();
+              navigate('/login', { replace: true });
+            }}
+          >
             <Text size='md' weight='semilg'>
               Logout
             </Text>

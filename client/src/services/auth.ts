@@ -3,7 +3,10 @@ import Cookies from 'js-cookie';
 import type { APILoginDataInterface } from '../lib/interface/auth';
 
 export const setToken = ({ jwt_token }: { jwt_token: string }): void => {
-  const copherAccessToken = CryptoJS.AES.encrypt(JSON.stringify(jwt_token), 'jwt_token');
+  const copherAccessToken = CryptoJS.AES.encrypt(
+    JSON.stringify(jwt_token),
+    'jwt_token',
+  );
   //   const rememberMe = getRememberMe();
   Cookies.set('jwt_token', copherAccessToken.toString(), {
     // expires: rememberMe ? 30 : 1,
@@ -24,11 +27,16 @@ export const getToken = (): string | null => {
   }
 };
 
-export const setUserInfo = ({ user_data }: { user_data: APILoginDataInterface }): void => {
-  const cipherUserInfo = CryptoJS.AES.encrypt(JSON.stringify(user_data), 'user_info');
-  //   const rememberMe = getRememberMe();
+export const setUserInfo = ({
+  user_data,
+}: {
+  user_data: APILoginDataInterface;
+}): void => {
+  const cipherUserInfo = CryptoJS.AES.encrypt(
+    JSON.stringify(user_data),
+    'user_info',
+  );
   Cookies.set('user_info', cipherUserInfo.toString(), {
-    // expires: rememberMe ? 30 : 1,
     expires: 1,
   });
 };

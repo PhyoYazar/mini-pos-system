@@ -46,6 +46,15 @@ orderSchema.pre(/^find/, function (next) {
   next();
 });
 
+orderSchema.pre(/^find/, function (next) {
+  this.populate({
+    path: 'product',
+    select: 'title -category',
+  });
+
+  next();
+});
+
 const Order = mongoose.model('Order', orderSchema);
 
 module.exports = Order;
