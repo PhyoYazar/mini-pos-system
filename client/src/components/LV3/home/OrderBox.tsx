@@ -34,6 +34,8 @@ const OrderBox = () => {
     endpoint: apiRoutes.getAllOrdersDetailsByUser,
   });
 
+  console.log(data);
+
   // if data exist, store in the state
   useEffect(() => {
     if (data?.status === 'success') {

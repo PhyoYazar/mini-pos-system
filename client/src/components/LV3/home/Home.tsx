@@ -8,6 +8,7 @@ import {
   CategoriesResInterface,
   ProductInterface,
 } from '../../../lib';
+import { getUserInfo } from '../../../services/auth';
 import { Image, Text, Title } from '../../LV1';
 import Button from '../../LV2/Button/Button';
 import Card from '../../LV2/Card/Card';
