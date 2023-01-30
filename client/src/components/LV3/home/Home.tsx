@@ -12,6 +12,7 @@ import { getUserInfo } from '../../../services/auth';
 import { Image, Text, Title } from '../../LV1';
 import Button from '../../LV2/Button/Button';
 import Card from '../../LV2/Card/Card';
+import Center from '../../LV2/Center';
 import Header from './Header';
 
 interface StyledInterface {
@@ -27,6 +28,7 @@ const Home = () => {
   const [activeElement, setActiveElement] = useState<string>('');
   const [searchKeywords, setSearchKeywords] = useState<string>('');
   const [productData, setProductData] = useState<ProductInterface[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const theme = useTheme();
 
@@ -47,14 +49,22 @@ const Home = () => {
     const fetchProducts = async (
       paramsData: FilterInterface,
     ): Promise<void> => {
-      const res: ProductsResInterface = await apiController({
-        endpoint: apiRoutes.getAllProducts,
-        params: paramsData,
-        signal: controller.signal,
-      });
+      try {
+        setIsLoading(true);
+        const res: ProductsResInterface = await apiController({
+          endpoint: apiRoutes.getAllProducts,
+          params: paramsData,
+          signal: controller.signal,
+        });
 
-      if (res?.status === 'success') {
-        setProductData(res.data);
+        if (res?.status === 'success') {
+          setProductData(res.data);
+          setIsLoading(false);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -102,7 +112,7 @@ const Home = () => {
         setSearchKeywords={setSearchKeywords}
       />
 
-      <main className='space-y-6'>
+      <main className='w-full space-y-6'>
         <section className='space-x-2'>
           <StyledButton
             isActive={activeElement === ''}
@@ -122,44 +132,54 @@ const Home = () => {
           ))}
         </section>
 
-        <section className='flex items-start flex-wrap gap-4 pb-6'>
-          {productData?.map((el, index) => (
-            <Card key={index} className='w-[190px] space-y-2'>
-              <Image iconType='card' width={170} height={170} />
+        {isLoading ? (
+          <Center>
+            <Image iconType='loading' width={60} height={60} />
+          </Center>
+        ) : (
+          <>
+            {productData?.length === 0 && <Center>No Product Found!</Center>}
 
-              <Title as='h3' weight='md'>
-                {el?.title}
-              </Title>
+            <section className='flex items-start flex-wrap gap-4 pb-6'>
+              {productData?.map((el, index) => (
+                <Card key={index} className='w-[190px] space-y-2'>
+                  <Image iconType='card' width={170} height={170} />
 
-              <div className='flex items-baseline gap-1'>
-                <Text weight='semilg' color={theme.colors.primaryLight}>
-                  Ks
-                </Text>
+                  <Title as='h3' weight='md'>
+                    {el?.title}
+                  </Title>
 
-                <Text
-                  size='lg'
-                  weight='semilg'
-                  color={theme.colors.primaryLight}
-                >
-                  {el?.price}
-                </Text>
-              </div>
+                  <div className='flex items-baseline gap-1'>
+                    <Text weight='semilg' color={theme.colors.primaryLight}>
+                      Ks
+                    </Text>
 
-              <Button
-                onClick={() => createOrderHandler(el?._id, el?.price)}
-                type='submit'
-                textcolor={theme.colors.white}
-                bordercolor={theme.colors.primaryLight}
-                bgcolor={theme.colors.primaryLight}
-                bghovercolor={theme.colors.primary}
-                borderhovercolor={theme.colors.primary}
-                fullWidth
-              >
-                Add to Cart
-              </Button>
-            </Card>
-          ))}
-        </section>
+                    <Text
+                      size='lg'
+                      weight='semilg'
+                      color={theme.colors.primaryLight}
+                    >
+                      {el?.price}
+                    </Text>
+                  </div>
+
+                  <Button
+                    onClick={() => createOrderHandler(el?._id, el?.price)}
+                    type='submit'
+                    textcolor={theme.colors.white}
+                    bordercolor={theme.colors.primaryLight}
+                    bgcolor={theme.colors.primaryLight}
+                    bghovercolor={theme.colors.primary}
+                    borderhovercolor={theme.colors.primary}
+                    fullWidth
+                  >
+                    Add to Cart
+                  </Button>
+                </Card>
+              ))}
+            </section>
+          </>
+        )}
       </main>
     </div>
   );

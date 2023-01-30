@@ -11,4 +11,5 @@ export const iconsName = [
   'mail',
   'openEye',
   'closeEye',
+  'loading',
 ];

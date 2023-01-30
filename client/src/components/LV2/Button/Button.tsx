@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface ButtonInterface {
   children?: React.ReactNode;
+  className?: string;
 
   href?: string;
   type?: 'button' | 'submit';

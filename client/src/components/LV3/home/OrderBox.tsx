@@ -29,13 +29,19 @@ const fetchOrderDetailsAPI = async (): Promise<
 
 const OrderBox = () => {
   const [ordersData, setOrdersData] = useState<OrderDetailResInterface>();
+  const [isLoading, setIsLoading] = useState<boolean>();
 
   const theme = useTheme();
 
   useEffect(() => {
+    setIsLoading(true);
     fetchOrderDetailsAPI()
-      .then((res) => res && setOrdersData(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        res && setOrdersData(res);
+        setIsLoading(false);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setIsLoading(false));
   }, []);
 
   // Delete Order by clicking Close icon
@@ -84,84 +90,96 @@ const OrderBox = () => {
 
   return (
     <div className='w-full h-full flex items-start justify-between flex-col pt-3'>
-      <div className='px-5 py-2 overflow-auto '>
+      <div className='w-full px-5 py-2 overflow-auto'>
         <Title size='xlg'>Order details</Title>
 
-        <div className='space-y-8'>
-          {ordersData?.data?.data.map((el, index) => (
-            <div key={index} className='flex items-start justify-between gap-3'>
-              <div className=''>
-                <Image iconType='card' width={85} height={85} />
-              </div>
+        {isLoading ? (
+          <div className='w-full h-72 flex-center'>
+            <Image iconType='loading' width={60} height={60} />
+          </div>
+        ) : (
+          <div className='space-y-8'>
+            {ordersData?.data?.data?.length === 0 && (
+              <div className='h-72 flex-center'>No order yet.</div>
+            )}
+            {ordersData?.data?.data?.map((el, index) => (
+              <div
+                key={index}
+                className='flex items-start justify-between gap-3'
+              >
+                <div className=''>
+                  <Image iconType='card' width={85} height={85} />
+                </div>
 
-              <div className='w-full h-[85px] flex flex-col justify-between  gap-1 overflow-hidden'>
-                <Text
-                  size='md'
-                  color={theme.colors.neutral900}
-                  className='line-clamp-2'
-                >
-                  {el?.product?.title}
-                </Text>
+                <div className='w-full h-[85px] flex flex-col justify-between  gap-1 overflow-hidden'>
+                  <Text
+                    size='md'
+                    color={theme.colors.neutral900}
+                    className='line-clamp-2'
+                  >
+                    {el?.product?.title}
+                  </Text>
 
-                <div className='flex-between'>
-                  <div className='flex items-center border border-neutral300 rounded-md shadow-sm'>
-                    <Box
-                      as='button'
-                      disabled={el?.total_products === 1}
-                      className='cursor-pointer border-r border-neutral300'
-                      onClick={() =>
-                        decreaseProductHandler(el?._id, el?.total_products)
-                      }
-                    >
-                      <Image
-                        iconType='minus'
-                        width={18}
-                        height={18}
-                        color={
-                          el?.total_products === 1
-                            ? theme.colors.neutral300
-                            : theme.colors.neutral500
+                  <div className='flex-between'>
+                    <div className='flex items-center border border-neutral300 rounded-md shadow-sm'>
+                      <Box
+                        as='button'
+                        disabled={el?.total_products === 1}
+                        className='cursor-pointer border-r border-neutral300'
+                        onClick={() =>
+                          decreaseProductHandler(el?._id, el?.total_products)
                         }
-                      />
-                    </Box>
+                      >
+                        <Image
+                          iconType='minus'
+                          width={18}
+                          height={18}
+                          color={
+                            el?.total_products === 1
+                              ? theme.colors.neutral300
+                              : theme.colors.neutral500
+                          }
+                        />
+                      </Box>
 
-                    <Box className='mx-1'>
-                      <Text>{el?.total_products}</Text>
-                    </Box>
+                      <Box className='mx-1'>
+                        <Text>{el?.total_products}</Text>
+                      </Box>
 
-                    <Box
-                      className='cursor-pointer border-l border-neutral300'
-                      onClick={() =>
-                        increaseProductHandler(el?._id, el?.total_products)
-                      }
-                    >
-                      <Image
-                        iconType='plus'
-                        width={18}
-                        height={18}
-                        color={theme.colors.neutral500}
-                      />
-                    </Box>
-                  </div>
+                      <Box
+                        className='cursor-pointer border-l border-neutral300'
+                        onClick={() =>
+                          increaseProductHandler(el?._id, el?.total_products)
+                        }
+                      >
+                        <Image
+                          iconType='plus'
+                          width={18}
+                          height={18}
+                          color={theme.colors.neutral500}
+                        />
+                      </Box>
+                    </div>
 
-                  <div className='flex items-baseline gap-1.5'>
-                    <Text color={theme.colors.primaryLight}>Ks</Text>
-                    <Text size='xlg' color={theme.colors.primaryLight}>
-                      {el?.product_price}
-                    </Text>
+                    <div className='flex items-baseline gap-1.5'>
+                      <Text color={theme.colors.primaryLight}>Ks</Text>
+                      <Text size='xlg' color={theme.colors.primaryLight}>
+                        {el?.product_price}
+                      </Text>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div
-                className='w-12  flex justify-end cursor-pointer'
-                onClick={() => deleteOrderHandler(el._id)}
-              >
-                <Image iconType='close' width={16} height={16} />
+                <div
+                  className='w-12  flex justify-end cursor-pointer'
+                  onClick={() => deleteOrderHandler(el._id)}
+                >
+                  <Image iconType='close' width={16} height={16} />
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* ----------------  amounts   ----------------- */}

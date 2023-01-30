@@ -10,6 +10,7 @@ import { useTheme } from 'styled-components';
 import { APILoginResInterface } from '../../../lib';
 import { apiController, apiRoutes } from '../../../controllers';
 import { setToken, setUserInfo } from '../../../services/auth';
+import { Image, Text } from '../../LV1';
 
 const validation = yup
   .object()
@@ -82,17 +83,38 @@ const LoginForm = () => {
 
         <div className='pt-3'>
           <Button
+            className='relative'
             disabled={isSubmitting}
             type='submit'
-            textsize='md'
             textcolor={theme.colors.white}
-            bordercolor={theme.colors.primaryLight}
-            bgcolor={theme.colors.primaryLight}
-            bghovercolor={theme.colors.primary}
-            borderhovercolor={theme.colors.primary}
+            bordercolor={
+              isSubmitting ? theme.colors.neutral300 : theme.colors.primaryLight
+            }
+            bgcolor={
+              isSubmitting ? theme.colors.neutral300 : theme.colors.primaryLight
+            }
+            bghovercolor={
+              isSubmitting ? theme.colors.neutral300 : theme.colors.primary
+            }
+            borderhovercolor={
+              isSubmitting ? theme.colors.neutral300 : theme.colors.primary
+            }
             fullWidth
           >
-            Sign in
+            {isSubmitting ? (
+              <>
+                <div className='absolute top-0 left-1/2 transform -translate-x-1/2'>
+                  <Image iconType='loading' width={60} height={40} />
+                </div>
+                <Text size='md' color={theme.colors.neutral300}>
+                  .
+                </Text>
+              </>
+            ) : (
+              <Text size='md' color={theme.colors.white}>
+                Sign in
+              </Text>
+            )}
           </Button>
         </div>
       </div>

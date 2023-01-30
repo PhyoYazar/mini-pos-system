@@ -14,6 +14,7 @@ import {
   MinusIcon,
   PlusIcon,
   CloseIcon,
+  LoadingIcon,
 } from './icon';
 
 interface ImageComponentInterface {
@@ -67,6 +68,9 @@ const IconComponent = (props: ImageComponentInterface) => {
   switch (props.iconType) {
     case 'image':
       return <ImageWrap {...props} />;
+
+    case 'loading':
+      return <LoadingIcon {...props} />;
 
     case 'openEye':
       return <EyeOpenIcon {...props} />;
