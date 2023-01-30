@@ -35,8 +35,10 @@ const Header = (props: PropsType) => {
             placeholder='Search'
             onChange={(e) => props.setSearchKeywords(e.target.value)}
             value={props.searchKeywords}
+            id='search'
+            autoComplete='off'
           />
-          <SearchButton>
+          <SearchButton as='label' htmlFor='search'>
             <Image
               iconType='search'
               width={18}
@@ -74,7 +76,7 @@ const Header = (props: PropsType) => {
             )}
           </div>
 
-          <div className='cursor-pointer'>
+          <div className='cursor-not-allowed'>
             <Image
               iconType='buy'
               width={26}
@@ -114,6 +116,7 @@ const SearchButton = styled.button`
   right: 8px;
   transform: translate(0, -50%);
   border-radius: 30px;
+  cursor: pointer;
 
   background-color: ${({ theme }) => theme.colors.primaryLight};
 `;
