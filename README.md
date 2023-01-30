@@ -16,15 +16,34 @@
 4. add .env file from example.env file
 5. yarn dev
 
-# DB
+## DB
 
 - username - phyo_yarzar
 - password - 6MHbBy50aYKJXZZn
 
-# API ENDPOINT
+## API ENDPOINT
 
 - [https://pos-ttlf.onrender.com](https://pos-ttlf.onrender.com/api/v1/products)
 
-# REACT ENDPOINT
+## REACT ENDPOINT
 
 - [https://pos-nu.vercel.app/](https://pos-nu.vercel.app/)
+
+## USER ACCOUNTS
+- `123456` is the password of every account. 
+
+1. username - admin@gmail.com (Admin role account)
+2. username - pyz@gmail.com (user)
+3. username - jeedi@gmail.com (user)
+4. ...
+- password - 123456
+-
+- ---------------------------------
+- We can see all the user accounts email in Mongodb Compass Database
+- `mongodb+srv://phyo_yarzar:6MHbBy50aYKJXZZn@mini-pos.y1vp40a.mongodb.net/mini-pos?retryWrites=true&w=majority`
+-
+----------------------------------
+
+
+
+
