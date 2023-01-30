@@ -8,6 +8,8 @@
 4. add .env file from example.env file
 5. yarn dev
 
+---
+
 ## To run nodejs "api"
 
 1. cd mini-pos-system
@@ -16,10 +18,19 @@
 4. add .env file from example.env file
 5. yarn dev
 
+---
+
+## POSTMAN API DOCUMENTATION
+
+- [https://documenter.getpostman.com/view/18586694/2s935hR7ct](https://documenter.getpostman.com/view/18586694/2s935hR7ct)
+  -I added postman collection into the repo (check it out).
+
 ## DB
 
 - username - phyo_yarzar
 - password - 6MHbBy50aYKJXZZn
+
+---
 
 ## API ENDPOINT
 
@@ -29,21 +40,20 @@
 
 - [https://pos-nu.vercel.app/](https://pos-nu.vercel.app/)
 
+---
+
 ## USER ACCOUNTS
-- `123456` is the password of every account. 
+
+- `123456` is the password of every account.
 
 1. username - admin@gmail.com (Admin role account)
 2. username - pyz@gmail.com (user)
 3. username - jeedi@gmail.com (user)
 4. ...
+
 - password - 123456
--
-- ---------------------------------
+- ***
+
 - We can see all the user accounts email in Mongodb Compass Database
 - `mongodb+srv://phyo_yarzar:6MHbBy50aYKJXZZn@mini-pos.y1vp40a.mongodb.net/mini-pos?retryWrites=true&w=majority`
--
-----------------------------------
-
-
-
-
+- ***
