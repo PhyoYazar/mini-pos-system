@@ -24,6 +24,8 @@ const productSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+// productSchema.index({ title: 'text' });
+
 productSchema.pre(/^find/, function (next) {
   this.populate({
     path: 'category',

@@ -11,6 +11,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 
 //module
 const AppError = require('./utils/appError');
@@ -85,6 +86,8 @@ app.use(
 
 // Serving static files
 app.use(express.static(`${__dirname}/public`));
+
+app.use(compression());
 
 // ROUTES
 app.use('/api/v1/auth', authRoutes);
