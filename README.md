@@ -25,11 +25,6 @@
 - [https://documenter.getpostman.com/view/18586694/2s935hR7ct](https://documenter.getpostman.com/view/18586694/2s935hR7ct)
   -I added postman collection into the repo (check it out).
 
-## DB
-
-- username - phyo_yarzar
-- password - 6MHbBy50aYKJXZZn
-
 ---
 
 ## API ENDPOINT
@@ -52,8 +47,15 @@
 4. ...
 
 - password - 123456
-- ***
+
+---
+
+## DB
+
+- username - phyo_yarzar
+- password - 6MHbBy50aYKJXZZn
 
 - We can see all the user accounts email in Mongodb Compass Database
 - `mongodb+srv://phyo_yarzar:6MHbBy50aYKJXZZn@mini-pos.y1vp40a.mongodb.net/mini-pos?retryWrites=true&w=majority`
-- ***
+
+---
